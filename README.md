@@ -1,33 +1,83 @@
 # MoodMap
 
-MoodMap is a minimal and responsive mood-tracking journal built with React, Tailwind CSS, and Firebase.
+A minimal and user-friendly mood tracking journal built for daily emotional logging and reflection.
+
+## Problem Statement
+
+Many people want to track their emotional health, but existing tools are often too complex or inconsistent for daily use.  
+`MoodMap` solves this by offering a calm, lightweight journaling experience where users can:
+
+- log multiple mood dimensions (not just one score),
+- attach optional written reflections,
+- observe trends over time using charts and calendar views,
+- and gain simple insights from their own data.
 
 ## Features
 
 - Email/password authentication with Firebase Auth
 - Protected routes with global auth state using Context API
-- Daily mood entry with 5 sliders:
-  - happiness
-  - sadness
-  - anxiety
-  - anger
-  - energy
-- Optional free-form journal entry
-- Calendar view showing entry vs no-entry days
-- Analytics with Recharts:
-  - average emotion values (week/month/year)
-  - percentage distribution of emotions
-- Filtering by time range and mood type
-- Basic insights generated from mood trends
-- Loading, empty, and error states
+- Daily mood entry with 5 sliders (`happiness`, `sadness`, `anxiety`, `anger`, `energy`)
+- Optional journal entry with each mood log
+- Calendar visualization of days with/without entries
+- Analytics dashboard with:
+  - average mood values for week/month/year
+  - emotion distribution percentages
+- Filtering by date range and mood type
+- Basic computed insights (trend-based, non-AI)
+- Entry deletion support
+- Dark mode / light mode toggle
+- Responsive UI with loading, empty, and error states
 
 ## Tech Stack
 
-- React (functional components, hooks, lazy loading)
-- React Router
-- Tailwind CSS
-- Firebase Auth + Firestore
-- Recharts
+- **Frontend:** React (functional components), React Router
+- **Styling:** Tailwind CSS
+- **Backend Services:** Firebase Authentication (Email/Password), Firestore
+- **Visualization:** Recharts
+- **Utilities:** date-fns
+
+## Setup Instructions
+
+### 1) Clone and install dependencies
+
+```bash
+npm install
+```
+
+### 2) Configure environment variables
+
+Create a `.env` file (or copy from `.env.example`) and add:
+
+```env
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
+
+### 3) Configure Firebase project
+
+In [Firebase Console](https://console.firebase.google.com/):
+
+1. Create/select a Firebase project
+2. Enable **Authentication > Email/Password**
+3. Enable **Firestore Database**
+4. Add your Web App and copy config values into `.env`
+
+### 4) Run locally
+
+```bash
+npm run dev
+```
+
+### 5) Build for production
+
+```bash
+npm run build
+npm run preview
+```
 
 ## Project Structure
 
@@ -38,14 +88,6 @@ MoodMap is a minimal and responsive mood-tracking journal built with React, Tail
 - `context/`
 - `hooks/`
 - `services/`
-
-## Firebase Setup
-
-1. Create a Firebase project in the [Firebase Console](https://console.firebase.google.com/).
-2. Enable **Authentication > Email/Password**.
-3. Create a **Firestore Database** in production or test mode.
-4. Copy `.env.example` to `.env` and replace with your Firebase values.
-5. Start the app.
 
 ## Firestore Schema
 
@@ -62,17 +104,3 @@ Each document stores:
 - `energy` (number)
 - `journalText` (string)
 - `createdAt` (ISO string)
-
-## Local Development
-
-```bash
-npm install
-npm run dev
-```
-
-## Build for Production
-
-```bash
-npm run build
-npm run preview
-```
